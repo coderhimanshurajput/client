@@ -7,7 +7,10 @@ const routes: Routes = [
         path: '',
         loadChildren: './home/home.module#HomeModule'
     },
-
+    {
+        path: 'blogs',
+        loadChildren: './blogs/blog.module#BlogModule'
+    },
     { path: '**', redirectTo: 'not-found' }
 ];
 

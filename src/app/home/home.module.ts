@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
+import { PageHeaderModule } from '../shared';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { HomeComponent } from './home.component';
         CommonModule,
         HomeRoutingModule,
         FormsModule,
-        HttpClientModule
+        HttpClientModule,
+        PageHeaderModule
     ],
     declarations: [HomeComponent]
 })
