@@ -15,7 +15,7 @@ export class CategoryListComponent implements OnInit {
         private API_ENDPOINT: string = `${Global.API_ENDPOINT}/blog-management`;
         public categoryList;
         private href: string;
-        private page: string;
+        private notData: string;
 
         constructor(public router: Router, private http: HttpClient) {}
 
@@ -28,6 +28,9 @@ export class CategoryListComponent implements OnInit {
         	let url = `${this.API_ENDPOINT}/category-list?s=a&f=f`;
 	    	this.http.get(url).subscribe((data: any)=> {
 	    		this.categoryList = data.result;
+                if (this.categoryList.length == 0) {
+                    this.notData = "Category Not Found"
+                }
 	    	}, (err) => {
 	    		alert(err.message);
 	    	});       	
