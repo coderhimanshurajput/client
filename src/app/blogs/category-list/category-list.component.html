@@ -1,0 +1,16 @@
+<div class="col-lg-12">
+	<div class="row">
+		<div class="col-md-7" style="background-color: #DFECFF; margin: 0 auto; float: none; border-radius: 5px; margin-bottom: 50px; padding: 25px; margin-top: 20px; " *ngFor = "let cat of categoryList">
+		 		<h1 style="margin-bottom: 25px;">{{cat.name}} 
+		 			<small class="pull-right " title="read {{cat.name}} blog" >
+		 				{{cat.blogs}} 
+		 				Blog{{cat.blogs > '1' ? 's' :''}}
+					<a routerLink = "/blogs/{{cat._id}}/{{cat.name}}">
+						<i class="fa fa-arrow-circle-o-right" style="color: #2086F5" aria-hidden="true" ></i>
+					</a>		
+		 			</small> </h1>
+		 		<img src={{cat.img}} width="100%" style="height: 350px; cursor: pointer;"> 
+		 		<p style="margin-top: 20px;">{{cat.description}}</p>
+		</div>
+	</div>
+</div>
