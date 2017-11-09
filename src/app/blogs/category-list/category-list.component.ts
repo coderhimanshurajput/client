@@ -15,7 +15,7 @@ export class CategoryListComponent implements OnInit {
         private API_ENDPOINT: string = `${Global.API_ENDPOINT}/blog-management`;
         public categoryList;
         private href: string;
-        private notData: string;
+        public notData: string;
 
         constructor(public router: Router, private http: HttpClient) {}
 
