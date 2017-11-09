@@ -6,7 +6,7 @@
 		 			<small class="pull-right " title="read {{cat.name}} blog" >
 		 				{{cat.blogs}} 
 		 				Blog{{cat.blogs > '1' ? 's' :''}}
-					<a routerLink = "/blogs/{{cat._id}}/{{cat.name}}">
+					<a *ngIf = "cat.blogs > 0" routerLink = "/blogs/{{cat._id}}/{{cat.name}}">
 						<i class="fa fa-arrow-circle-o-right" style="color: #2086F5" aria-hidden="true" ></i>
 					</a>		
 		 			</small> </h1>
