@@ -12,6 +12,7 @@ export class PageFooterComponent implements OnInit{
 
 		let date = new Date();
 		this.year = date.getFullYear();
+		
 	}
 
 }
