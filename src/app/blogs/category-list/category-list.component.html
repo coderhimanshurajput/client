@@ -1,24 +1,22 @@
 <div>
-	<img src="assets/images/category_page.jpeg" alt="Jimmy Logic" width="100%" style="height: 300px;">
+   <img src="assets/images/category_page.jpeg" alt="Jimmy Logic" width="100%" style="height: 300px;">
 </div>
 <div class="col-lg-12">
-	<div class="row">
-
-		<div class="col-md-7" style="background-color: #DFECFF; margin: 0 auto; float: none; border-radius: 5px; margin-bottom: 50px; padding: 25px; margin-top: 20px; " *ngFor = "let cat of categoryList">
-		 		<h1 style="margin-bottom: 25px;">{{cat.name}} 
-		 			<small class="pull-right " title="read {{cat.name}} blog" >
-		 				{{cat.blogs}} 
-		 				Blog{{cat.blogs > '1' ? 's' :''}}
-					<a *ngIf = "cat.blogs > 0" routerLink = "/blogs/{{cat._id}}/{{cat.name}}">
-						<i class="fa fa-arrow-circle-o-right" style="color: #2086F5" aria-hidden="true" ></i>
-					</a>		
-		 			</small> </h1>
-		 		<div style="cursor: pointer;">
-		 			
-		 		<img src={{cat.img}} width="100%" style="height: 350px; "> 
-		 		<p style="margin-top: 20px;">{{cat.description}}</p>
-		 		</div>	
-		</div>
-		<h1 *ngIf = "notData" class="text-center"> {{notData}}</h1>
-	</div>
+   <div class="row">
+      <div class="col-md-7" style="background-color: #DFECFF; margin: 0 auto; float: none; border-radius: 5px; margin-bottom: 50px; padding: 25px; margin-top: 20px; " *ngFor = "let cat of categoryList">
+         <h1 style="margin-bottom: 25px;">{{cat.name}} 
+            <small class="pull-right " title="read {{cat.name}} blog" > {{cat.blogs}} Blog{{cat.blogs > '1' ? 's' :''}}
+            <a *ngIf = "cat.blogs > 0" routerLink = "/blogs/{{cat._id}}/{{cat.name}}">
+            <i class="fa fa-arrow-circle-o-right" style="color: #2086F5" aria-hidden="true" ></i>
+            </a>		
+            </small> 
+         </h1>
+         <div>
+            <img src={{cat.img}} width="100%" style="height: 350px; "> 
+            <p style="margin-top: 20px;">{{cat.description}}</p>
+         </div>
+         <a routerLink = "/blogs/{{cat._id}}/{{cat.name}}">Read More...</a>
+      </div>
+      <h1 *ngIf = "notData" class="text-center"> {{notData}}</h1>
+   </div>
 </div>
