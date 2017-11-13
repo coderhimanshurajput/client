@@ -9,7 +9,7 @@ import { BlogComponent } from './blog.component';
 import { CategoryListComponent } from './category-list/category-list.component';
 import { BlogListComponent } from './blog-list/blog-list.component';
 import { ReadBlogComponent } from './read-blog/read-blog.component';
-import { PageHeaderModule } from '../shared';
+import { PageHeaderModule, PageFooterModule} from '../shared';
 
 
 
@@ -20,7 +20,8 @@ import { PageHeaderModule } from '../shared';
         BlogRoutingModule,
         FormsModule,
         HttpClientModule,
-        PageHeaderModule
+        PageHeaderModule,
+        PageFooterModule
         
 
     ],
