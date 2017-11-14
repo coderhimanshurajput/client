@@ -1,13 +1,10 @@
 <div class="container">
-		<div class="row">
-			<div class="col-md-7" style=" margin: 0 auto; float: none; border-radius: 5px; margin-bottom: 50px; padding: 25px; margin-top: 20px; ">
-			 		<h1 style="margin-bottom: 15px;">{{blogDetail.title}} </h1>
-
-
-			 	 <p style="color:#449BF5; font-style: italic;">Author: {{blogDetail.author}}	</p>
-			 	 <p style="color:#449BF5; font-style: italic;">Posted: {{blogDetail.created_at | date}}</p>
-
-			 		<div innerHTML="{{blogDetail.content}}" style="font-size: 21px; margin-top: 15px;"></div>
-			</div>
-		</div>
+   <div class="row">
+      <div class="col-md-7" style=" margin: 0 auto; float: none; border-radius: 5px; margin-bottom: 50px; padding: 25px; margin-top: 20px; ">
+         <h1 style="margin-bottom: 15px;">{{blogDetail.title}} </h1>
+         <p style="color:#449BF5; font-style: italic;">Author: {{blogDetail.author}}	</p>
+         <p style="color:#449BF5; font-style: italic;">Posted: {{blogDetail.created_at | date}}</p>
+         <div innerHTML="{{blogDetail.content}}" style="font-size: 21px; margin-top: 15px;"></div>
+      </div>
+   </div>
 </div>
