@@ -11,6 +11,10 @@ const routes: Routes = [
         path: 'blogs',
         loadChildren: './blogs/blog.module#BlogModule'
     },
+    {
+        path: 'deposit',
+        loadChildren: './account-detail/account-detail.module#AccountDetailModule'
+    },    
     { path: '**', redirectTo: 'not-found' }
 ];
 
