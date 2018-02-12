@@ -14,3 +14,12 @@ html, body {
 .blog-list-back-color {
 	background-color: #EAEAEA
 }
+
+.red-alert {
+    color: #F44444;
+}
+
+.login-required-alert {
+	padding-right: 220px;
+    margin-top: 5px;	
+}

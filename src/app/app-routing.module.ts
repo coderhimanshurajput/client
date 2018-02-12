@@ -14,7 +14,11 @@ const routes: Routes = [
     {
         path: 'deposit',
         loadChildren: './account-detail/account-detail.module#AccountDetailModule'
-    },    
+    },
+    {
+        path: 'questions',
+        loadChildren: './questions/questions.module#QuestionsModule'
+    },        
     { path: '**', redirectTo: 'not-found' }
 ];
 
