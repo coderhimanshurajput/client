@@ -1,0 +1,76 @@
+<app-page-header></app-page-header>
+<div style="position: relative;">
+    <!-- <img class="" src="assets/images/l-r.jpg" alt="Jimmy Logic" width="100%" style="height: 573px;"> -->
+
+     <!-- start registration form -->
+     <form *ngIf = "!loginPage" (ngSubmit)="registerForm.valid && registration()" role="form" #registerForm="ngForm">
+      <fieldset class="form-group">
+        <label>First Name*</label>
+        <input name="first_name" [(ngModel)]="register.first_name" class="form-control" placeholder="First name" #first_name="ngModel" required="true">
+        <div *ngIf="first_name.invalid && (first_name.dirty || first_name.touched || registerForm.submitted)">
+          <div *ngIf="first_name.errors.required" class="red-alert login-required-alert">
+            Name is required.
+          </div>
+        </div>
+      </fieldset>
+      <fieldset class="form-group">
+        <label>Last Name</label>
+        <input name="last_name" [(ngModel)]="register.last_name" class="form-control" placeholder="Last name" #last_name="ngModel">
+      </fieldset>      
+      <fieldset class="form-group">
+        <label>Email*</label>
+        <input name="email" [(ngModel)]="register.email" class="form-control" placeholder="Email" #email="ngModel" required="true">
+        <div *ngIf="email.invalid && (email.dirty || email.touched || registerForm.submitted)">
+          <div *ngIf="email.errors.required" class="red-alert login-required-alert">
+            Title is required.
+          </div>
+        </div>
+      </fieldset>
+      <fieldset class="form-group">
+        <label>Password (<a class="cursor-pointer" style="text-decoration:none" (click) = "showHidePassword()">{{pwdField ? 'show' : 'hide'}}</a>)*</label>
+        <input [type]="pwdField ? 'password' : 'text'" name="name" [(ngModel)]="register.password" class="form-control" placeholder="Password" #name="ngModel" required="true">
+
+        <div *ngIf="name.invalid && (name.dirty || name.touched || registerForm.submitted)">
+          <div *ngIf="name.errors.required" class="red-alert login-required-alert">
+            Password is required.
+          </div>
+        </div>
+      </fieldset>     
+      	<p class="pull-right login-reg-sug">Already have an account? <a class="cursor-pointer" style="text-decoration:none" (click) = "loginOrRegister()">Login</a></p> 
+       
+      <div style="margin-top: 20px;">
+        <button type="Submit" class="btn btn-primary">Register</button>
+      </div>
+    </form>
+    <!-- end registration form -->
+
+    <!-- start login form  -->
+     <form *ngIf = "loginPage" (ngSubmit)="loginForm.valid && login()" role="form" #loginForm="ngForm">    
+      <fieldset class="form-group">
+        <label>Email*</label>
+        <input name="email" [(ngModel)]="register.email" class="form-control" placeholder="Email" #email="ngModel" required="true">
+        <div *ngIf="email.invalid && (email.dirty || email.touched || loginForm.submitted)">
+          <div *ngIf="email.errors.required" class="red-alert login-required-alert">
+            Title is required.
+          </div>
+        </div>
+      </fieldset>
+      <fieldset class="form-group">
+        <label>Password (<a class="cursor-pointer" style="text-decoration:none" (click) = "showHidePassword()">{{pwdField ? 'show' : 'hide'}}</a>)*</label>
+        <input [type]="pwdField ? 'password' : 'text'" name="name" [(ngModel)]="register.password" class="form-control" placeholder="Password" #name="ngModel" required="true">
+
+        <div *ngIf="name.invalid && (name.dirty || name.touched || loginForm.submitted)">
+          <div *ngIf="name.errors.required" class="red-alert login-required-alert">
+            Password is required.
+          </div>
+        </div>
+      </fieldset>     
+      	<p class="pull-right login-reg-sug">Don't have an account? <a class="cursor-pointer" style="text-decoration:none" (click) = "loginOrRegister()">Register</a></p> 
+       
+      <div style="margin-top: 20px;">
+        <button type="Submit" class="btn btn-primary">Login</button>
+      </div>
+    </form> 
+
+    <!-- end login form -->   
+</div>

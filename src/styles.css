@@ -10,6 +10,12 @@ html, body {
 .cursor-pointer{
 	cursor: pointer;
 }
+.cursor-default{
+	cursor: default;
+}
+.text-dec-none {
+ 	text-decoration:none
+ }
 
 .blog-list-back-color {
 	background-color: #EAEAEA
@@ -22,4 +28,8 @@ html, body {
 .login-required-alert {
 	padding-right: 220px;
     margin-top: 5px;	
+}
+
+.header-font {
+	font-size: 15px;
 }

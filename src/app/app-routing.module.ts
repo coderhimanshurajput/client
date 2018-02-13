@@ -18,7 +18,11 @@ const routes: Routes = [
     {
         path: 'questions',
         loadChildren: './questions/questions.module#QuestionsModule'
-    },        
+    },
+    {
+        path: 'entry',
+        loadChildren: './login-register/login-register.module#LoginRegisterModule'
+    },
     { path: '**', redirectTo: 'not-found' }
 ];
 
