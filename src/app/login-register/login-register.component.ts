@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from "@angular/router";
 import { Location } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Global } from '../shared';
+import { CheckIsLoggedService } from './services/login-register.service'
 
 @Component({
     selector: 'app-questions',
@@ -15,14 +16,23 @@ export class LoginRegisterComponent implements OnInit {
         public register = {};
         public pwdField: boolean = true;
         public loginPage: boolean = true;
+        private previousUrl: string;
 		private API_ENDPOINT: string = `${Global.API_ENDPOINT}/user-profile`;
 
         constructor( 
             public router: Router, 
             private http: HttpClient,
-            private location: Location) { }
+            private loginService: CheckIsLoggedService,
+            private location: Location) { 
+            router.events
+                .filter(event => event instanceof NavigationEnd)
+                .subscribe((e:any) => {
+                    this.previousUrl = e.url;
+                });
+        }
 
         ngOnInit() {
+
         }
 
         showHidePassword() {
@@ -46,11 +56,13 @@ export class LoginRegisterComponent implements OnInit {
         login() {
             let apiUrl = `${this.API_ENDPOINT}/login`;
             this.http.post(apiUrl, this.register).subscribe((data: any) => {
-                console.log(data);
                 if (data.status == 'success' && data.statusCode == 200) {
-                    localStorage.setItem('_auth', data.auth);
-                    alert('loggedin successfully');
-                    // this.location.back();
+                    localStorage.setItem('_auth', data.auth);    
+                    this.loginService.IsUserLoggedIn.next(true);               
+                    // alert('loggedin successfully');
+                    if (history.length > 2) {
+                        this.location.back();
+                    }
                 }
             }, (err) => {
                 alert(err.message);

@@ -1,0 +1,72 @@
+<div  class="container">
+<div class="row" style="margin-top: 50px;">
+  <div class="text-center">
+    <input *ngIf = "questionList" type="text" style="width: 48%" name="search" placeholder=" search ...">
+    <button class="pull-right" (click) = "listOrAsk()">{{questionList ? 'Submit Question' : 'Back'}}</button>
+  </div>
+  <div *ngIf="questionList">
+    <div class="col-lg-7 cursor-pointer blog-list-back-color" routerLink="/questions/{{question._id}}/{{question.slug}}" style="; margin: 0 auto; float: none; border-radius: 5px; margin-bottom: 50px; padding: 25px; margin-top: 20px; " *ngFor="let question of questions">
+      <h2 style="margin-bottom: 25px;">{{question.title}} 
+		 			<small class="pull-right ">
+						<i class="fa fa-arrow-circle-o-right " style="color: #2086F5" aria-hidden="true" ></i>		
+		 			</small> 
+		 		</h2>
+      <div>
+        <p> <i class="fa fa-user"></i> {{ question.author}} </p>
+        <p> <i class="fa fa-building"></i> {{ question.where_asked}} </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!questionList" class="row">
+  <div class="col-lg-7 cursor-pointer blog-list-back-color" style="; margin: 0 auto; float: none; border-radius: 5px; margin-bottom: 50px; padding: 25px; margin-top: 20px; ">
+    <form (ngSubmit)="addQuestionForm.valid && questionSubmit()" role="form" #addQuestionForm="ngForm">
+      <fieldset class="form-group">
+        <label>Name*</label>
+        <input name="author" [(ngModel)]="question.author" class="form-control" placeholder="Your name" #author="ngModel" required="true">
+        <div *ngIf="author.invalid && (author.dirty || author.touched || addQuestionForm.submitted)">
+          <div *ngIf="author.errors.required" class="red-alert login-required-alert">
+            Name is required.
+          </div>
+        </div>
+      </fieldset>
+      <fieldset class="form-group">
+        <label>Subject*</label>
+        <input name="subject" [(ngModel)]="question.subject" class="form-control" placeholder="Question" #subject="ngModel" required="true">
+        <div *ngIf="subject.invalid && (subject.dirty || subject.touched || addQuestionForm.submitted)">
+          <div *ngIf="subject.errors.required" class="red-alert login-required-alert">
+            Title is required.
+          </div>
+        </div>
+      </fieldset>
+      <fieldset class="form-group">
+        <label>Title*</label>
+        <input name="name" [(ngModel)]="question.title" class="form-control" placeholder="Question" #name="ngModel" required="true">
+        <div *ngIf="name.invalid && (name.dirty || name.touched || addQuestionForm.submitted)">
+          <div *ngIf="name.errors.required" class="red-alert login-required-alert">
+            Title is required.
+          </div>
+        </div>
+      </fieldset>      
+      <fieldset class="form-group">
+        <label>Where it was asked*</label>
+        <input name="whereAsked" [(ngModel)]="question.where_asked" class="form-control" placeholder="Asked from" #whereAsked="ngModel" required="true">
+        <div *ngIf="whereAsked.invalid && (whereAsked.dirty || whereAsked.touched || addQuestionForm.submitted)">
+          <div *ngIf="whereAsked.errors.required" class="red-alert login-required-alert">
+            This field required.
+          </div>
+        </div>
+      </fieldset>
+      <label>Answer</label>
+      <ckeditor name="answer" [(ngModel)]="question.answer" [config]="{uiColor: '#9C6649'}" debounce="500">
+      </ckeditor>
+      <div style="margin-top: 20px;">
+        <button type="Submit" class="btn btn-primary">Submit</button>
+        <button type="reset" class="btn btn-secondary">Reset</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+</div>

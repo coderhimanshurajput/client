@@ -1,24 +1,19 @@
 <header class="header-fixed">
   <div class="header-limiter ">
     <!-- <h1><a routerLink = "/">Jimmy Logic</a></h1> -->
-
-	 <div class="dropdown pull-right">
+	 <div *ngIf = "isUserLoggedIn" class="dropdown pull-right">
 	    <button class="btn btn-primary-custom dropdown-toggle margin-top-4" type="button" data-toggle="dropdown">Jitendra
 	    <span class="caret"></span></button>
 	    <ul class="dropdown-menu">
-	      <li><a style="color: #000;" >Account Settings</a></li>
-	      <li><a style="color: #000;">Logout</a></li>
+	      <li><a style="color: #000;" class="cursor-pointer" >Account Settings</a></li>
+	      <li><a style="color: #000;" class="cursor-pointer" (click) = "logout()">Logout</a></li>
 	    </ul>
 	  </div>
 
     <nav >
       <a class="header-font" routerLink = "/">Home</a>
       <a class="header-font" routerLink = "/blogs/categories" >Blogs</a>
-      <!-- <a class="header-font" routerLink = "/entry">Login/Register</a> -->
-<!--       <a class="header-font cursor-pointer">Jitendra 
-      	<i class="fa fa-caret-down" aria-hidden="true"></i> 
-      </a> -->
-
+      <a  class="header-font" routerLink = "/entry">Login/Register</a>
     </nav>	  
   </div>
 </header>

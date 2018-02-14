@@ -1,0 +1,37 @@
+<div class="container min-height-100">
+   <div class="row">
+      <div class="col-md-7" style=" margin: 0 auto; float: none; border-radius: 5px; margin-bottom: 50px; padding: 25px; margin-top: 20px; ">
+         <h1 style="margin-bottom: 15px;">{{question.title}} </h1>
+         <p style="color:#449BF5; font-style: italic;">Author: {{question.author}}	</p>
+         <p style="color:#449BF5; font-style: italic;">Where asked: {{question.where_asked}}	</p>         
+         <p style="color:#449BF5; font-style: italic;">Posted: {{question.created_at | date}}</p>
+
+         <div *ngFor = "let ans of question.answer"  style="font-size: 21px; margin-top: 15px;">
+         	<p style="font-size: 20px;" [innerHTML]="ans.ans | filterRawHtml"></p>
+         	<div class="pull-right" style="background-color: #EEF0F1; width: 35%; padding: 10px;">
+         		<p style="font-size: 12px; ">answered: {{ans.added | date: 'dd MMM yyyy - hh: mm'}}</p>
+         		<p style="font-size: 15px;">{{ans.ans_by.first_name}}</p>
+         		
+         	</div>         		
+
+         </div>
+
+
+         <div style="margin-top: 150px;">
+         	<h2>Your Answer</h2>
+    		<form (ngSubmit)="newAnswerForm.valid && updateNewAnswer(newAnswer)" role="form" #newAnswerForm="ngForm">
+
+     
+
+      <label>Answer</label>
+      <ckeditor name="answer" [(ngModel)]="newAnswer" [config]="{uiColor: '#9C6649'}" debounce="500">
+      </ckeditor>
+      <div style="margin-top: 20px;">
+        <button type="Submit" class="btn btn-primary">Submit</button>
+        <button type="reset" class="btn btn-secondary">Reset</button>
+      </div>
+    </form>        	
+         </div>
+      </div>
+   </div>
+</div>
