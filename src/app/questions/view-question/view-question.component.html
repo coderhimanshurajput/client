@@ -1,37 +1,56 @@
 <div class="container min-height-100">
-   <div class="row">
-      <div class="col-md-7" style=" margin: 0 auto; float: none; border-radius: 5px; margin-bottom: 50px; padding: 25px; margin-top: 20px; ">
-         <h1 style="margin-bottom: 15px;">{{question.title}} </h1>
-         <p style="color:#449BF5; font-style: italic;">Author: {{question.author}}	</p>
-         <p style="color:#449BF5; font-style: italic;">Where asked: {{question.where_asked}}	</p>         
-         <p style="color:#449BF5; font-style: italic;">Posted: {{question.created_at | date}}</p>
-
-         <div *ngFor = "let ans of question.answer"  style="font-size: 21px; margin-top: 15px;">
-         	<p style="font-size: 20px;" [innerHTML]="ans.ans | filterRawHtml"></p>
-         	<div class="pull-right" style="background-color: #EEF0F1; width: 35%; padding: 10px;">
-         		<p style="font-size: 12px; ">answered: {{ans.added | date: 'dd MMM yyyy - hh: mm'}}</p>
-         		<p style="font-size: 15px;">{{ans.ans_by.first_name}}</p>
-         		
-         	</div>         		
-
-         </div>
-
-
-         <div style="margin-top: 150px;">
-         	<h2>Your Answer</h2>
-    		<form (ngSubmit)="newAnswerForm.valid && updateNewAnswer(newAnswer)" role="form" #newAnswerForm="ngForm">
-
-     
-
-      <label>Answer</label>
-      <ckeditor name="answer" [(ngModel)]="newAnswer" [config]="{uiColor: '#9C6649'}" debounce="500">
-      </ckeditor>
-      <div style="margin-top: 20px;">
-        <button type="Submit" class="btn btn-primary">Submit</button>
-        <button type="reset" class="btn btn-secondary">Reset</button>
+  <div class="row">
+    <div *ngIf="!editMyAns" class="col-md-7" style=" margin: 0 auto; float: none; border-radius: 5px; margin-bottom: 50px; padding: 25px; margin-top: 20px; ">
+      <h1 *ngIf="!titleEdit" style="margin-bottom: 15px;">{{question.title}} 
+            <i *ngIf = "question.reader == question.author_id" class="material-icons cursor-pointer pull-right" (click) = "editTitle()" >mode_edit</i>
+          </h1>
+      <div *ngIf="titleEdit" style="margin-bottom: 15px;">
+        <input style="width: 75%; padding: 5px;" type="text" name="title" [(ngModel)]="question.title" placeholder="Improve title">
+        <button class="btn btn-primary" type="button" (click)="updateTitle()">Update</button>
+        <button class="btn btn-secondary" type="button" (click)="changeTitleField()">Cancel</button>
       </div>
-    </form>        	
-         </div>
+      <p style="color:#449BF5; font-style: italic;">Author: {{question.author}} </p>
+      <p style="color:#449BF5; font-style: italic;">Where asked: {{question.where_asked}} </p>
+      <p style="color:#449BF5; font-style: italic;">Posted: {{question.created_at | date}}</p>
+      <div *ngFor="let ans of question.answer; let i = index" style="font-size: 21px; margin-top: 15px;">
+        <p style="font-size: 20px;" [innerHTML]="ans.ans | filterRawHtml"></p>
+        <span *ngIf="ans.ans_by._id == question.reader" class="">
+
+            <i style="margin-left: 15px;" class="material-icons cursor-pointer pull-right" (click) = "editAnswer(ans.ans, ans._id, ans.ans_by._id)" >mode_edit</i>
+
+            <i style="color: red;" class="material-icons cursor-pointer pull-right" (click) = "deleteAnswer(question._id, ans._id, question.reader, i)" >delete</i>            
+          </span>
+        <div class="pull-right" style="background-color: #EEF0F1; width: 42%; padding: 10px; margin: 20px 0px 60px 370px ;">
+          <p style="font-size: 12px; ">answered: {{ans.added | date: 'dd MMM yyyy - hh: mm'}}</p>
+          <p style="font-size: 15px;">{{ans.ans_by.first_name}}</p>
+        </div>
       </div>
-   </div>
+      <div style="margin-top: 150px;">
+        <h2 style="margin-bottom: 30px;">Your Answer</h2>
+        <form (ngSubmit)="newAnswerForm.valid && updateNewAnswer(newAnswer)" role="form" #newAnswerForm="ngForm">
+          <ckeditor name="answer" [(ngModel)]="newAnswer" [config]="{uiColor: '#9C6649'}" debounce="500">
+          </ckeditor>
+          <div style="margin-top: 20px;">
+            <button type="Submit" class="btn btn-primary">Submit</button>
+            <button type="reset" class="btn btn-secondary">Reset</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div *ngIf="editMyAns" class="col-md-7" style=" margin: 0 auto; float: none; border-radius: 5px; margin-bottom: 50px; padding: 25px; margin-top: 20px; ">
+      <h1 *ngIf="!titleEdit" style="margin-bottom: 15px;">{{question.title}} 
+          <i class="fa fa-times cursor-pointer pull-right" (click) = "cancelUpdateAns()" ></i>
+      </h1>
+      <div style="margin-top: 50px;">
+        <form (ngSubmit)="newAnswerForm.valid && updateAnswer(newAnswer)" role="form" #newAnswerForm="ngForm">
+          <ckeditor name="answer" [(ngModel)]="newAnswer" [config]="{uiColor: '#9C6649'}" debounce="500">
+          </ckeditor>
+          <div style="margin-top: 20px;">
+            <button type="Submit" class="btn btn-primary">Update</button>
+            <button type="reset" class="btn btn-secondary">Reset</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>

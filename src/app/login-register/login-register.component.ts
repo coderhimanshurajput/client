@@ -46,7 +46,6 @@ export class LoginRegisterComponent implements OnInit {
         registration() {
             let apiUrl = `${this.API_ENDPOINT}/register`;
             this.http.post(apiUrl, this.register).subscribe((data: any) => {
-                console.log(data);
                 alert('Registration success');
             }, (err) => {
                 alert(err.message);
