@@ -57,8 +57,8 @@ export class LoginRegisterComponent implements OnInit {
             this.http.post(apiUrl, this.register).subscribe((data: any) => {
                 if (data.status == 'success' && data.statusCode == 200) {
                     localStorage.setItem('_auth', data.auth);    
+                    localStorage.setItem('_user', JSON.stringify(data.result));    
                     this.loginService.IsUserLoggedIn.next(true);               
-                    // alert('loggedin successfully');
                     if (history.length > 2) {
                         this.location.back();
                     }

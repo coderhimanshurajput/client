@@ -1,8 +1,8 @@
 <header class="header-fixed">
   <div class="header-limiter ">
-    <!-- <h1><a routerLink = "/">Jimmy Logic</a></h1> -->
+    <h1><a routerLink = "/">Jimmy Logic</a></h1>
 	 <div *ngIf = "isUserLoggedIn" class="dropdown pull-right">
-	    <button class="btn btn-primary-custom dropdown-toggle margin-top-4" type="button" data-toggle="dropdown">Jitendra
+	    <button class="btn btn-primary-custom dropdown-toggle margin-top-4" type="button" data-toggle="dropdown">{{userInfo.first_name}}
 	    <span class="caret"></span></button>
 	    <ul class="dropdown-menu">
 	      <li><a style="color: #000;" class="cursor-pointer" >Account Settings</a></li>

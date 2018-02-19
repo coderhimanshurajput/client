@@ -25,6 +25,9 @@
           <p style="font-size: 15px;">{{ans.ans_by.first_name}}</p>
         </div>
       </div>
+    <div *ngIf = "question.answer?.length == '0'">
+      <img src="assets/images/questions/not-answerd.jpg" alt="Jimmy Logic" width="100%" style="height: 350px;">
+    </div>
       <div style="margin-top: 150px;">
         <h2 style="margin-bottom: 30px;">Your Answer</h2>
         <form (ngSubmit)="newAnswerForm.valid && updateNewAnswer(newAnswer)" role="form" #newAnswerForm="ngForm">

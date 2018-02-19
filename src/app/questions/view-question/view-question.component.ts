@@ -36,6 +36,7 @@ export class ViewQuestionsComponent implements OnInit {
             let url = `${this.API_ENDPOINT}/get-answers/${id}/${slug}`;
             this.http.get(url).subscribe((data: any)=> {
                 this.question = data.result;
+                console.log(this.question)
             }, (err) => {
                 alert(err.message);
             });
