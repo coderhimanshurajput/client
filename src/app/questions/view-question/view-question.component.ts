@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { Global } from '../../shared';
+import { Global, AuthService } from '../../shared';
 
 @Component({
     selector: 'app-view-question',
@@ -21,7 +21,8 @@ export class ViewQuestionsComponent implements OnInit {
 
         constructor(
             private http: HttpClient,
-            private activatedRoute: ActivatedRoute) { }
+            private activatedRoute: ActivatedRoute,
+            private authService: AuthService) { }
 
         ngOnInit() {
             this.activatedRoute.params.subscribe((params: Params) => {
@@ -36,7 +37,6 @@ export class ViewQuestionsComponent implements OnInit {
             let url = `${this.API_ENDPOINT}/get-answers/${id}/${slug}`;
             this.http.get(url).subscribe((data: any)=> {
                 this.question = data.result;
-                console.log(this.question)
             }, (err) => {
                 alert(err.message);
             });
@@ -44,16 +44,23 @@ export class ViewQuestionsComponent implements OnInit {
 
         updateNewAnswer(newAnswer) {
 
-            if (newAnswer) {
+            if (!this.authService.getToken()) {
+                return alert("Login required to perform this action");
+            }
 
-            let url = `${this.API_ENDPOINT}/add-new-answers/${this.question['_id']}/${this.question['slug']}`;
-            this.http.post(url, {ans:newAnswer}).subscribe((data: any)=> {
-                this.question = data.result;
-                this.getAnswersByQuestionId(this.id, this.slug);
-                this.newAnswer = '';
-            }, (err) => {
-                alert(err.message);
-            });
+            if (newAnswer && newAnswer.length>0) {
+                let url = `${this.API_ENDPOINT}/add-new-answers/${this.question['_id']}/${this.question['slug']}`;
+                this.http.post(url, {ans:newAnswer}).subscribe((data: any)=> {
+                    this.question = data.result;
+                    this.getAnswersByQuestionId(this.id, this.slug);
+                    this.newAnswer = '';
+                }, (err) => {
+                    if (err.status === 401 || err.status === 400) {
+                        alert(err.error.message);
+                    }else{
+                        alert(err.message);                        
+                    }
+                });
             }else{
                 alert('Answer missing');
             }
