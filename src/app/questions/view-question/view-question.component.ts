@@ -54,6 +54,7 @@ export class ViewQuestionsComponent implements OnInit {
                     this.question = data.result;
                     this.getAnswersByQuestionId(this.id, this.slug);
                     this.newAnswer = '';
+                    alert(data.message);
                 }, (err) => {
                     if (err.status === 401 || err.status === 400) {
                         alert(err.error.message);

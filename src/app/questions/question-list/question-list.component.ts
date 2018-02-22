@@ -47,6 +47,7 @@ export class QuestionsListComponent implements OnInit {
         	let url = `${this.API_ENDPOINT}/add-new`;
         	this.http.post(url, this.question).subscribe((data: any)=> {
 	    		this.questionList = true;
+                alert(data.message);
 	    	}, (err) => {
                 if (err.status === 400) {
                     alert(err.error.message);

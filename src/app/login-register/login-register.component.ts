@@ -32,7 +32,6 @@ export class LoginRegisterComponent implements OnInit {
         }
 
         ngOnInit() {
-
         }
 
         showHidePassword() {
@@ -47,6 +46,8 @@ export class LoginRegisterComponent implements OnInit {
             let apiUrl = `${this.API_ENDPOINT}/register`;
             this.http.post(apiUrl, this.register).subscribe((data: any) => {
                 alert('Registration success');
+                this.register = {};
+                this.loginPage = true;
             }, (err) => {
                 alert(err.message);
             });

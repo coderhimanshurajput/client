@@ -7,6 +7,7 @@ import { CheckIsLoggedService } from './login-register/services/login-register.s
 import { AppComponent } from './app.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent
@@ -18,7 +19,8 @@ import { AppComponent } from './app.component';
     AppRoutingModule
   ],
   providers: [
-    CheckIsLoggedService
+    CheckIsLoggedService,
+
     ],
   bootstrap: [AppComponent]
 })
