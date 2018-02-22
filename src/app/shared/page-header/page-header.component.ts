@@ -47,7 +47,8 @@ export class PageHeaderComponent implements OnInit {
     }	
 
     logout() {
-    	localStorage.removeItem('_auth');
+        localStorage.removeItem('_auth');
+    	localStorage.removeItem('_user');
     	this.isUserLoggedIn = false;
     	this.router.navigateByUrl('/entry');
     }

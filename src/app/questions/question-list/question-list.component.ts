@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { Global } from '../../shared';
+import { Global, AuthService } from '../../shared';
 
 @Component({
     selector: 'app-question-list',
@@ -11,16 +11,26 @@ import { Global } from '../../shared';
 
 export class QuestionsListComponent implements OnInit {
 
-		public question = {};
-		private API_ENDPOINT: string = `${Global.API_ENDPOINT}/question`;
-		public questionList: boolean = true;
-		public questions: any;
-        constructor(public router: Router, private http: HttpClient) { }
+        question = <any>{};
+        private API_ENDPOINT: string = `${Global.API_ENDPOINT}/question`;
+        public questionList: boolean = true;
+        public questions: any;
+        constructor(
+            public router: Router, 
+            private http: HttpClient,
+            private authService: AuthService) { }
 
         ngOnInit() {
+            let userInfo = this.authService.getUserInfo()
+            if (userInfo) {
+               this.question.author = userInfo.first_name ? userInfo.first_name : '';
+            }
         	this.getQuestions();
         }
-
+        userInfo() {
+            let info = this.authService.getUserInfo();
+            return info;
+        }
         getQuestions() {
         	let url = `${this.API_ENDPOINT}/question-list`;
         	this.http.get(url).subscribe((data: any)=> {

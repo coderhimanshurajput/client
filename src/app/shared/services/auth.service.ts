@@ -7,4 +7,8 @@ export class AuthService {
     return localStorage.getItem('_auth');
   }
 
+  getUserInfo() {
+  	return JSON.parse(localStorage.getItem('_user'));
+  }
+
 }
