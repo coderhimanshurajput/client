@@ -10,7 +10,7 @@ import { QuestionsComponent } from './questions.component';
 import { QuestionsListComponent } from './question-list/question-list.component';
 import { ViewQuestionsComponent } from './view-question/view-question.component';
 import { PageHeaderModule, PageFooterModule } from '../shared';
-import { TokenInterceptor, AuthService } from '../shared';
+import { TokenInterceptor, AuthService, Debounce } from '../shared';
 import { FilterPipe } from './view-question/filter/filter.pipe';
 
 
@@ -37,7 +37,8 @@ import { FilterPipe } from './view-question/filter/filter.pipe';
     useClass: TokenInterceptor,
     multi: true
     },
-    AuthService
+    AuthService,
+    Debounce
     ],    
 })
 export class QuestionsModule {

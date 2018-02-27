@@ -8,7 +8,7 @@ const routes: Routes = [
         loadChildren: './home/home.module#HomeModule'
     },
     {
-        path: 'blogs',
+        path: 'categories/blog',
         loadChildren: './blogs/blog.module#BlogModule'
     },
     {

@@ -1,7 +1,7 @@
 <div  class="container">
 <div class="row" style="margin-top: 50px;">
   <div class="text-center">
-    <input *ngIf = "questionList" type="text" style="width: 48%" name="search" placeholder=" search ...">
+    <input *ngIf = "questionList" type="text" style="width: 48%" name="search" placeholder=" search ..." [ngModel]="search" (ngModelChange)="filterQuestion($event)" >
     <button class="pull-right" (click) = "listOrAsk()">{{questionList ? 'Submit Question' : 'Back'}}</button>
   </div>
   <div *ngIf="questionList">
@@ -33,7 +33,7 @@
       </fieldset>
       <fieldset class="form-group">
         <label>Subject*</label>
-        <input name="subject" [(ngModel)]="question.subject" class="form-control" placeholder="Question" #subject="ngModel" required="true">
+        <input name="subject" [(ngModel)]="question.subject" class="form-control" placeholder="Subject" #subject="ngModel" required="true">
         <div *ngIf="subject.invalid && (subject.dirty || subject.touched || addQuestionForm.submitted)">
           <div *ngIf="subject.errors.required" class="red-alert login-required-alert">
             Title is required.

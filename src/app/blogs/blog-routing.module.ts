@@ -9,7 +9,7 @@ const routes: Routes = [
     { 
     	path: '', component: BlogComponent, children: [
         {
-            path: 'categories', 
+            path: '', 
             component: CategoryListComponent 
         },
         {
@@ -17,7 +17,7 @@ const routes: Routes = [
             component: BlogListComponent 
         },
         {
-    		path: 'pro/:id/:name', 
+    		path: 'read-blog/:id/:name', 
     		component: ReadBlogComponent 
     	}
     ] }

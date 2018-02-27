@@ -18,7 +18,6 @@ export class BlogComponent implements OnInit {
         constructor(public router: Router, private http: HttpClient) {}
 
         ngOnInit() {
-
         }
 
 }

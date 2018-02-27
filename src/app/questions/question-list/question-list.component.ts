@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { Global, AuthService } from '../../shared';
+import { Global, AuthService, Debounce } from '../../shared';
 
 @Component({
     selector: 'app-question-list',
@@ -18,13 +18,12 @@ export class QuestionsListComponent implements OnInit {
         constructor(
             public router: Router, 
             private http: HttpClient,
-            private authService: AuthService) { }
+            private authService: AuthService,
+            private debounce: Debounce) { }
 
         ngOnInit() {
-            let userInfo = this.authService.getUserInfo()
-            if (userInfo) {
-               this.question.author = userInfo.first_name ? userInfo.first_name : '';
-            }
+            
+
         	this.getQuestions();
         }
         userInfo() {
@@ -39,13 +38,23 @@ export class QuestionsListComponent implements OnInit {
 	    		alert(err.message);
 	    	})
         }
+
         listOrAsk() {
         	this.questionList = this.questionList ? false : true;
+            if (!this.questionList) {
+                this.question = {};
+                let userInfo = this.authService.getUserInfo();
+                if (userInfo) {
+                   this.question.author = userInfo.first_name ? userInfo.first_name : '';
+                }        
+
+            }
         }
 
         questionSubmit() {
         	let url = `${this.API_ENDPOINT}/add-new`;
         	this.http.post(url, this.question).subscribe((data: any)=> {
+                this.getQuestions();
 	    		this.questionList = true;
                 alert(data.message);
 	    	}, (err) => {
@@ -56,5 +65,15 @@ export class QuestionsListComponent implements OnInit {
                 }
 	    	})
 
+        }
+
+        filterQuestion(search) {
+
+
+            // this.debounce.delay(search).then((data:any) => {
+            //     console.log(data);
+            // });
+            // console.log();
+            // console.log(search);
         }
 }

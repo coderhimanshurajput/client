@@ -65,7 +65,7 @@ export class LoginRegisterComponent implements OnInit {
                     }
                 }
             }, (err) => {
-                alert(err.message);
+                alert(err.error.message || err.message);
             });            
         }
 
