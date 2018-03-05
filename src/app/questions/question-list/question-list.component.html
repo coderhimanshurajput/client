@@ -4,6 +4,12 @@
     <input *ngIf = "questionList" type="text" style="width: 48%" name="search" placeholder=" search ..." [ngModel]="search" (ngModelChange)="filterQuestion($event)" >
     <button class="pull-right" (click) = "listOrAsk()">{{questionList ? 'Submit Question' : 'Back'}}</button>
   </div>
+  <div > 
+      <ng-template let-length [ngTemplateOutletContext]="{ $implicit: questions?.length }" [ngTemplateOutlet]="t" #t>
+     <p style="padding: 60px 0 0px 245px; font-size: 20px;"> {{length}} {{length > 1 ? 'results' : 'result'}} </p>
+  </ng-template>
+  </div>
+
   <div *ngIf="questionList">
     <div class="col-lg-7 cursor-pointer blog-list-back-color" routerLink="/questions/{{question._id}}/{{question.slug}}" style="; margin: 0 auto; float: none; border-radius: 5px; margin-bottom: 50px; padding: 25px; margin-top: 20px; " *ngFor="let question of questions">
       <h2 style="margin-bottom: 25px;">{{question.title}} 

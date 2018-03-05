@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, Input } from '@angular/core';
+import { Router, } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Global, AuthService, Debounce } from '../../shared';
 
@@ -12,6 +12,7 @@ import { Global, AuthService, Debounce } from '../../shared';
 export class QuestionsListComponent implements OnInit {
 
         question = <any>{};
+        // @Input() var:any;
         private API_ENDPOINT: string = `${Global.API_ENDPOINT}/question`;
         public questionList: boolean = true;
         public questions: any;
@@ -68,12 +69,11 @@ export class QuestionsListComponent implements OnInit {
         }
 
         filterQuestion(search) {
-
-
-            // this.debounce.delay(search).then((data:any) => {
-            //     console.log(data);
-            // });
-            // console.log();
-            // console.log(search);
+            this.debounce.delay(search).then((data:any) => {
+                let url = `${this.API_ENDPOINT}/question-search?filter=${data}`;
+                this.http.get(url).subscribe((data: any)=> {
+                    this.questions = data.result;
+                });
+            });
         }
 }

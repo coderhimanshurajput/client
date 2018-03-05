@@ -6,10 +6,16 @@ export class Debounce {
 
   	timeout = null;
 
-    // delay(search): Promise<any> { 
-    // 	this.timeout = setTimeout(() => {
-    //     	return Promise.resolve(search); 
-    // 	}, 2000);
-    // }   
+    delay(search){ 
+
+    clearTimeout(this.timeout);
+
+	let promise = new Promise((resolve, reject) => {
+    	this.timeout = setTimeout(() => {
+	    	resolve(search)
+    	}, 500);
+	  });
+  		return promise;    	
+    }   
 
 }
