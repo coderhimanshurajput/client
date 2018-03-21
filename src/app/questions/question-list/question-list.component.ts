@@ -12,7 +12,6 @@ import { Global, AuthService, Debounce } from '../../shared';
 export class QuestionsListComponent implements OnInit {
 
         question = <any>{};
-        // @Input() var:any;
         private API_ENDPOINT: string = `${Global.API_ENDPOINT}/question`;
         public questionList: boolean = true;
         public questions: any;
@@ -22,8 +21,7 @@ export class QuestionsListComponent implements OnInit {
             private authService: AuthService,
             private debounce: Debounce) { }
 
-        ngOnInit() {
-            
+        ngOnInit() {          
 
         	this.getQuestions();
         }

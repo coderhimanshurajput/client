@@ -1,5 +1,5 @@
 <div  class="container" >
-<div class="row" style="margin-top: 50px;">
+<div class="row" style="margin-top: 50px; margin-bottom: 90px;">
   <div class="text-center">
     <input *ngIf = "questionList" type="text" style="width: 48%" name="search" placeholder=" search ..." [ngModel]="search" (ngModelChange)="filterQuestion($event)" >
     <button class="pull-right" (click) = "listOrAsk()">{{questionList ? 'Submit Question' : 'Back'}}</button>
@@ -11,8 +11,8 @@
   </div>
 
   <div *ngIf="questionList">
-    <div class="col-lg-7 cursor-pointer blog-list-back-color" routerLink="/questions/{{question._id}}/{{question.slug}}" style="; margin: 0 auto; float: none; border-radius: 5px; margin-bottom: 50px; padding: 25px; margin-top: 20px; " *ngFor="let question of questions">
-      <h2 style="margin-bottom: 25px;">{{question.title}} 
+    <div class="col-lg-7 cursor-pointer blog-list-back-color" routerLink="/questions/{{question._id}}/{{question.slug}}" style="; margin: 0 auto; float: none; border-radius: 5px;  padding: 15px; margin-top: 20px; " *ngFor="let question of questions">
+      <h2 style="margin-bottom: 8px;">{{question.title}} 
 		 			<small class="pull-right ">
 						<i class="fa fa-arrow-circle-o-right " style="color: #2086F5" aria-hidden="true" ></i>		
 		 			</small> 

@@ -12,6 +12,7 @@ import { ViewQuestionsComponent } from './view-question/view-question.component'
 import { PageHeaderModule, PageFooterModule } from '../shared';
 import { TokenInterceptor, AuthService, Debounce } from '../shared';
 import { FilterPipe } from './view-question/filter/filter.pipe';
+import { QuestionResolve } from './questions.resolve';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { FilterPipe } from './view-question/filter/filter.pipe';
     multi: true
     },
     AuthService,
-    Debounce
+    Debounce,
+    QuestionResolve
     ],    
 })
 export class QuestionsModule {
